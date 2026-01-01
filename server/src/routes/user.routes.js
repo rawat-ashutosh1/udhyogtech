@@ -4,15 +4,11 @@ const rbac = require("../../middlewares/rbac.middleware");
 const controller = require("../../controllers/user.controller");
 const upload = require("../../middlewares/upload.js");
 router.get("/", auth, rbac(["Admin"]), controller.listUsers);
-
 router.post("/",auth, rbac(["Admin"]), controller.createUser);
 router.put("/:id",auth, rbac(["Admin"]), controller.updateUser);
-
 router.delete("/:id",auth, rbac(["Admin"]), controller.deleteUser);
 router.post("/candidate",upload.single("resume"), controller.createCandidate);
 router.patch("/:id/status", auth, rbac(["Admin"]), controller.toggleStatus);
-
-
 router.get("/candidate-list", auth, rbac(["Admin"]), controller.listCandidate);
 router.put("/store-candidate/:id",auth, rbac(["Admin"]), controller.storeCandidate);
 module.exports = router;
